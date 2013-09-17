@@ -136,7 +136,7 @@ instance Show Program where
 
 stepProgram p = let curCom = runC $ runCom p $ commands p ^! (curInstr $ mstate p) in p { mstate = snd . curCom $ mstate p }
 
-data Flags = Flags Integer
+data Flags = Flags Integer deriving (Eq)
 instance Show Flags where
   show f = concatMap (++"\n") $ map fst $ filter snd $ map (\(ES s) -> (s, checkFlag (ES s) f) ) flags
 flags = [ES "debug"]
